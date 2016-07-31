@@ -1,1 +1,29 @@
-file
+chapter 2
+kernel source code:
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+git pull
+patch -p1 < ../patch-x.y.z
+内核配置文件位置：内核代码树的根目录下的
+configure file:.cofig
+内核提供了各种不同的工具来简化内核配置
+make config
+make defconfig
+在修改配置文件后，或者在用已有的配置文件配置新的代码树的时候，应该这样验证和更新配置
+make oldconfig
+编译内核：
+make
+可以衍生出多个编译作业并行进行
+make -j32
+    
+内核编程的要点
+1 内核编程时即不能访问C库也不能访问标准的C头文件
+2 内核编程时必须使用GNU C
+3 内核编程时缺乏像用户空间那样的内存保护机制
+4 内核编程时难以执行浮点运算
+5 内核给每个进程只有一个很小的定长堆栈
+6 由于内核支持异步中断 抢占 SMP，因此必须时刻注意同步和并发
+7 要考虑可移植性的重要性
+
+内核编程使用的头文件均为组成内核源代码树的内核头文件
+ printk(KERN_ERR "this is an error!\n");
+
