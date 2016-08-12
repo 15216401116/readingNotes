@@ -1,0 +1,8 @@
+RIB vs FIB
+The routing table and forwarding table are very closely related. **When all of the routing protocols find path information towards a given prefix, they're installed into the routing table. This is what's shown when you run something like "show ip route" (Cisco) or "show route" (Juniper).**
+
+Now let's say you introduce redundant paths into your network. So if you looked at the routing table, you'd see both paths, but one would be marked as "best". Here's where the difference is, **only the BEST PATHS from the routing table will be installed into the forwarding table.**
+
+Now you ask, "Why does it matter, the routing table knows which paths are best, why do we need to install them somewhere else?" Effectively it comes down to two things. First, the way some protocols advertise routing information (i.e. BGP), BGP will only advertise their BEST paths, instead of all the other routing information in BGP. Second, hardware efficiency - let's take Juniper for example. When the routing table is built, it is built in the routing engine (or supervisor for you Cisco folks). The forwarding table is installed in memory on the linecards. This means that when packets come in, they do not need to consult the routing engine every single time, this cuts down on more CPU utilization of the RE. RE/supervisors are used for running all of the routing protocols, so it can be CPU intensive. We don't want normal traffic slowing down routing protocol convergence, and we don't want convergence causing packet loss or latency.
+
+A simple analogy is when you lookup directions in Google maps, you are given multiple options to get to your destination (routing table). But you're only going to pick one way to get to where you're going (forwarding table).
