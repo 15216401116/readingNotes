@@ -17,4 +17,9 @@ Vim
 15. `r LETTER` replace the letter on the cursor with the LETTER
 16. `ce LETTERS` delete the word after the cursor and insert LETTERS
 17. `c [number] motion(e|$w)` just like `d`
-18. 
+18. `ctrl+g` show your location in the file and the file status
+19. `number+G` return you to line number
+20. `/word` n:next N:back search for the next word 
+21. `?word` search for the previse word
+22. `ctrl+o ctrl+i` move cursor backward/forward
+23. `%` move cursor to the maching [ ( { 
